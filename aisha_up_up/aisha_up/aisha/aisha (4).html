@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Задание 1 - базовый стиль</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        ul {
+            background-color: #f9f9f9;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Задание 1</h1>
+
+    <h2>Маркированный список</h2>
+    <ul>
+        <li>1. <a href="http://kubsu.ru/" target="_blank">kubsu (http)</a></li>
+        <li>2. <a href="https://kubsu.ru/" target="_blank">kubsu (https)</a></li>
+        <li>3. <a href="https://kubsu.ru/">
+            <img src="1669586493_WxH.jpg" 
+                 alt="Панорама КубГУ" width="450">
+        </a></li>
+        <li>4. <a href="p1.html">внутр. страница</a></li>
+        <li>5. <a href="">главная</a></li>
+        <li>6. <a href="#fragment">фрагмент</a></li>
+        <li>7. <a href="https://www.kubsu.ru/ru/search?keys=образование&category=8&year=2023">поиск 3параметра</a></li>
+        <li>8. <a href="https://www.kubsu.ru/ru/node/38730?id=12345">страница с id</a></li>
+        <li>9. <a href="aisha (4).html">текущий каталог</a></li>
+        <li>10. <a href="info/i.html">каталог info</a></li>
+        <li>11. <a href="../u.html">уровень выше</a></li>
+        <li>12. <a href="../../u.html">два уровня выше</a></li>
+        <li>13. <p>Контекст: <a href="https://kubsu.ru">КубГУ</a></p></li>
+        <li>14. <a href="https://www.kubsu.ru/ru/university#fragment">Фрагмент страницы на стороннем сайте КубГУ</a></li>
+        <li>16. <a href="">пустой href</a></li>
+        <li>17. <a>без href</a></li>
+        <li>18. <a href="https://kubsu.ru" rel="nofollow">nofollow</a></li>
+        <li>19. <a href="https://kubsu.ru" rel="noindex">noindex</a></li>
+        <li>21. <a href="ftp://example.com/">FTP файл</a></li>
+    </ul>
+
+    <h2>Области картинки</h2>
+    <p>Квадрат - русская версия сайта КУБГУ</p>
+    <p>Круг - английская версия сайта КУБГУ</p>
+    <img src="a2cbabc9ba9c37d069d0d7fc8390e327.jpg"
+         alt="Квадрат и круг"
+         usemap="#examplemap">
+
+    <map name="examplemap">
+        <area shape="rect" coords="240,25,430,195" href="https://kubsu.ru" alt="Прямоугольная область" title="https://kubsu.ru">
+        <area shape="circle" coords="110,110,110" href="https://kubsu.ru/en" alt="Круглая область" title="https://kubsu.ru/en">
+    </map>
+    
+    <h2>Нумерованный список</h2>
+    <ol>
+        <li><a href="https://kubsu.ru" title="Главная страница КубГУ">Главная</a></li>
+        <li><a href="https://kubsu.ru/ru/university" title="Информация об университете">Университет</a></li>
+        <li><a href="https://kubsu.ru/ru/education" title="Образовательные программы">Образование</a></li>
+        <li><a href="https://kubsu.ru/ru/science" title="Научная деятельность">Наука</a></li>
+        <li><a href="https://kubsu.ru/ru/abiturient" title="Информация для абитуриентов">Абитуриентам</a></li>
+    </ol>
+
+    <h2 id="fragment">Фрагмент текущей страницы</h2>
+    <p>Это фрагмент страницы, на который ведет ссылка из первого раздела.(п.6)</p>
+  
+    <h2>Форма</h2>
+    <form>
+        <label>Имя: <input type="text" name="name"></label><br>
+        <label>Телефон: <input type="tel" name="phone"></label><br>
+        <label>Email: <input type="email" name="email"></label><br>
+        <label>Дата рождения: <input type="date" name="birthdate"></label><br>
+        
+        <span>Пол:</span>
+        <label><input type="radio" name="gender" value="male"> Мужской</label>
+        <label><input type="radio" name="gender" value="female"> Женский</label>
+        <br>
+
+        <label>Любимый язык программирования:
+            <select multiple name="languages">
+                <option value="pascal">Pascal</option>
+                <option value="Python">Python</option>
+                <option value="C++">C++</option>
+                <option value="C">C</option>
+                <option value="JavaScript">JavaScript</option>
+                <option value="PHP">PHP</option>
+                <option value="Java">Java</option>
+                <option value="Haskel">Haskel</option>
+                <option value="Clojure">Clojure</option>
+                <option value="Prolog">Scala</option>
+            </select>
+        </label><br>
+
+        <label>Биография: <textarea name="bio"></textarea></label><br>
+        <label>С контрактом ознакомлен(a)<input type="checkbox" name="agreement"> </label><br>
+        <button type="submit">Сохранить</button>
+    </form>
+
+</body>
+</html>
