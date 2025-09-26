@@ -131,37 +131,206 @@
 
     <section id="fragment">
         <h2 id="form">Форма</h2>
-        <form>
-            <label>Имя: <input type="text" name="name"></label><br>
-            <label>Телефон: <input type="tel" name="phone"></label><br>
-            <label>Email: <input type="email" name="email"></label><br>
-            <label>Дата рождения: <input type="date" name="birthdate"></label><br>
+        <form id="myForm">
+            <div class="form-group">
+                <label for="name" class="required">Имя:</label>
+                <div class="field-hint">Введите ваше полное имя</div>
+                <input type="text" id="name" name="name" required minlength="2" placeholder="Например: Иван Иванов">
+                <div class="error" id="nameError">Имя должно содержать минимум 2 символа</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone" class="required">Телефон:</label>
+                <div class="field-hint">Введите 11 цифр без пробелов и других символов</div>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{11}" required placeholder="Например: 79101234567">
+                <div class="error" id="phoneError">Телефон должен содержать ровно 11 цифр</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email" class="required">Email:</label>
+                <div class="field-hint">Введите действующий email адрес</div>
+                <input type="email" id="email" name="email" required placeholder="Например: example@mail.ru">
+                <div class="error" id="emailError">Введите корректный email адрес</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="birthdate" class="required">Дата рождения:</label>
+                <div class="field-hint">Выберите вашу дату рождения</div>
+                <input type="date" id="birthdate" name="birthdate" required>
+                <div class="error" id="birthdateError">Пожалуйста, выберите дату рождения</div>
+            </div>
 
-            <span>Пол:</span>
-            <label><input type="radio" name="gender" value="male"> Мужской</label>
-            <label><input type="radio" name="gender" value="female"> Женский</label>
-            <br>
+            <div class="form-group">
+                <label class="required">Пол:</label>
+                <div class="field-hint">Выберите ваш пол</div>
+                <div class="radio-group">
+                    <label><input type="radio" name="gender" value="male" required> Мужской</label>
+                    <label><input type="radio" name="gender" value="female"> Женский</label>
+                    <label><input type="radio" name="gender" value="other"> Другой</label>
+                </div>
+                <div class="error" id="genderError">Пожалуйста, выберите ваш пол</div>
+            </div>
 
-            <label>Любимый язык программирования:
-                <select multiple name="languages">
+            <div class="form-group">
+                <label for="languages">Любимый язык программирования:</label>
+                <div class="field-hint">Вы можете выбрать несколько языков, удерживая клавишу Ctrl</div>
+                <select multiple id="languages" name="languages" size="5">
                     <option value="pascal">Pascal</option>
                     <option value="python">Python</option>
                     <option value="c++">C++</option>
                     <option value="c">C</option>
                     <option value="js">JavaScript</option>
+                    <option value="java">Java</option>
+                    <option value="php">PHP</option>
+                    <option value="ruby">Ruby</option>
                 </select>
-            </label><br>
+                <div class="error" id="languagesError">Пожалуйста, выберите хотя бы один язык программирования</div>
+            </div>
 
-            <label>Биография: <textarea name="bio"></textarea></label><br>
-            <label><input type="checkbox" name="agreement"> С контрактом ознакомлен</label><br>
+            <div class="form-group">
+                <label for="bio">Биография:</label>
+                <div class="field-hint">Расскажите немного о себе</div>
+                <textarea id="bio" name="bio" rows="4" placeholder="Например: Учусь программированию, интересуюсь веб-разработкой..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" name="agreement" required> 
+                        <span class="required">С контрактом ознакомлен(а)</span>
+                    </label>
+                </div>
+                <div class="error" id="agreementError">Необходимо согласие с контрактом</div>
+            </div>
+            
             <button type="submit">Сохранить</button>
+            <div id="formMessage" style="display:none; margin-top:15px; padding:10px; border-radius:4px;"></div>
         </form>
     </section>
 </main>
 
 <footer>
-  
+    <p>© 2023 Aisha_UP_UP Corporation. Все права защищены.</p>
 </footer>
+
+<script>
+    const form = document.getElementById('myForm');
+    const inputs = form.querySelectorAll('input, select, textarea');
+    
+    // Валидация при вводе
+    inputs.forEach(input => {
+        input.addEventListener('input', () => {
+            validateField(input);
+        });
+        
+        // Для радио-кнопок и чекбоксов используем событие change
+        if (input.type === 'radio' || input.type === 'checkbox') {
+            input.addEventListener('change', () => {
+                validateField(input);
+            });
+        }
+    });
+    
+    // Валидация при отправке формы
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let isValid = true;
+        
+        inputs.forEach(input => {
+            if (!validateField(input)) {
+                isValid = false;
+            }
+        });
+        
+        // Дополнительная проверка для языков программирования
+        const languagesSelect = document.getElementById('languages');
+        if (languagesSelect.selectedOptions.length === 0) {
+            document.getElementById('languagesError').style.display = 'block';
+            isValid = false;
+        } else {
+            document.getElementById('languagesError').style.display = 'none';
+        }
+        
+        if (isValid) {
+            // Показываем сообщение об успехе
+            const message = document.getElementById('formMessage');
+            message.textContent = 'Форма успешно отправлена!';
+            message.style.backgroundColor = '#d4edda';
+            message.style.color = '#155724';
+            message.style.display = 'block';
+            
+            // Очищаем форму через 3 секунды
+            setTimeout(() => {
+                form.reset();
+                message.style.display = 'none';
+                
+                // Сбрасываем стили валидации
+                inputs.forEach(input => {
+                    const errorElement = document.getElementById(input.name + 'Error');
+                    if (errorElement) {
+                        errorElement.style.display = 'none';
+                    }
+                    input.style.borderColor = '#ddd';
+                    input.style.backgroundColor = '';
+                });
+            }, 3000);
+        } else {
+            // Показываем сообщение об ошибке
+            const message = document.getElementById('formMessage');
+            message.textContent = 'Пожалуйста, исправьте ошибки в форме';
+            message.style.backgroundColor = '#f8d7da';
+            message.style.color = '#721c24';
+            message.style.display = 'block';
+        }
+    });
+    
+    function validateField(field) {
+        let errorElement;
+        
+        // Для группы радио-кнопок проверяем, выбрана ли хоть одна
+        if (field.type === 'radio') {
+            const radioGroup = document.querySelectorAll(`input[name="${field.name}"]`);
+            const isChecked = Array.from(radioGroup).some(radio => radio.checked);
+            errorElement = document.getElementById(field.name + 'Error');
+            
+            if (!isChecked) {
+                errorElement.style.display = 'block';
+                return false;
+            } else {
+                errorElement.style.display = 'none';
+                return true;
+            }
+        }
+        
+        // Для остальных полей
+        errorElement = document.getElementById(field.name + 'Error');
+        
+        if (!field.validity.valid) {
+            // Специальная проверка для телефона
+            if (field.name === 'phone' && field.value.length !== 11 && /[^0-9]/.test(field.value)) {
+                errorElement.textContent = 'Телефон должен содержать только цифры';
+            }
+            
+            errorElement.style.display = 'block';
+            return false;
+        } else {
+            errorElement.style.display = 'none';
+            return true;
+        }
+    }
+    
+    // Автоматическое форматирование телефона (только цифры, ограничение 11 символов)
+    const phoneInput = document.getElementById('phone');
+    phoneInput.addEventListener('input', function() {
+        // Удаляем все нецифровые символы
+        this.value = this.value.replace(/\D/g, '');
+        
+        // Ограничиваем длину 11 символами
+        if (this.value.length > 11) {
+            this.value = this.value.slice(0, 11);
+        }
+    });
+</script>
 
 </body>
 </html>
