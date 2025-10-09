@@ -386,7 +386,6 @@
                 <div class="radio-group">
                     <label><input type="radio" name="gender" value="male" required> Мужской</label>
                     <label><input type="radio" name="gender" value="female"> Женский</label>
-                    <label><input type="radio" name="gender" value="other"> Другой</label>
                 </div>
                 <div class="error" id="genderError">Пожалуйста, выберите ваш пол</div>
             </div>
@@ -437,21 +436,17 @@
     const form = document.getElementById('myForm');
     const inputs = form.querySelectorAll('input, select, textarea');
     
-    // Валидация при вводе
     inputs.forEach(input => {
         input.addEventListener('input', () => {
             validateField(input);
         });
         
-        // Для радио-кнопок и чекбоксов используем событие change
         if (input.type === 'radio' || input.type === 'checkbox') {
             input.addEventListener('change', () => {
                 validateField(input);
             });
         }
     });
-    
-    // Валидация при отправке формы
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         let isValid = true;
@@ -461,7 +456,5 @@
                 isValid = false;
             }
         });
-        
-        // Дополнительная проверка для языков программирования
         const languagesSelect = document.getElementById('languages');
         if (languagesSelect.selectedOptions.length
