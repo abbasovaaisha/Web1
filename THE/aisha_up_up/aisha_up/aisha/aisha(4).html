@@ -1,215 +1,86 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Задание 2 - сайт</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+import java.util.*;
 
-<header>
-    <div class="logo"><img src="bm.png" width="50"> </div>
-    <h1>Aisha_UP_UP Corporation</h1>
-</header>
+interface Body {
+    double V();
+    double S();
+    void print();
+}
 
-<nav>
-    <a href="#mar_sp">Маркированный список</a>
-    <a href="#table">таблица</a>
-    <a href="#form">Форма</a>
-</nav>
+class Paral implements Body {
+    double a, b, c;
+    
+    Paral(double a, double b, double c) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+    
+    public double V() {
+        return a * b * c;
+    }
+    
+    public double S() {
+        return 2 * (a * b + b * c + a * c);
+    }
+    
+    public void print() {
+        System.out.println("Параллелограмм = " + a + " " + b + " " + c);
+    }
+}
 
-<main>
-    <section class="mobile-order-2">
-        <h2 id="mar_sp">Маркированный список</h2>
-        <ul>
-            <li>1. <a href="http://kubsu.ru/" target="_blank">kubsu (http)</a></li>
-            <li>2. <a href="https://kubsu.ru/" target="_blank">kubsu (https)</a></li>
-            <li>3. <a href="https://kubsu.ru/">
-                <img src="1669586493_WxH.jpg" alt="Панорама КубГУ" width="450">
-            </a></li>
-            <li>4. <a href="p1.html">внутр. страница</a></li>
-            <li>5. <a href="">главная</a></li>
-            <li>6. <a href="#fragment">фрагмент</a></li>
-            <li>7. <a href="https://www.kubsu.ru/ru/search?keys=образование&category=8&year=2023">поиск 3параметра</a></li>
-            <li>8. <a href="https://www.kubsu.ru/ru/node/38730?id=12345">страница с id</a></li>
-            <li>9. <a href="aisha(4).html">текущий каталог</a></li>
-            <li>10. <a href="info/i.html">каталог info</a></li>
-            <li>11. <a href="../u.html">уровень выше</a></li>
-            <li>12. <a href="../../u.html">два уровня выше</a></li>
-            <li>13. <p>Контекст: <a href="https://kubsu.ru">КубГУ</a></p></li>
-            <li>14. <a href="https://www.kubsu.ru/ru/university#fragment">Фрагмент на КубГУ</a></li>
-            <li>16. <a href="">пустой href</a></li>
-            <li>17. <a>без href</a></li>
-            <li>18. <a href="https://kubsu.ru" rel="nofollow">nofollow</a></li>
-            <li>19. <a href="https://kubsu.ru" rel="noindex">noindex</a></li>
-            <li>21. <a href="ftp://example.com/">FTP файл</a></li>
-        </ul>
-    </section>
+class Shar implements Body {
+    double r;
+    
+    Shar(double r) {
+        this.r = r;
+    }
+    
+    public double V() {
+        return (4.0/3.0) * Math.PI * r * r * r;
+    }
+    
+    public double S() {
+        return 4 * Math.PI * r * r;
+    }
+    
+    public void print() {
+        System.out.println("Шар = " + r);
+    }
+}
 
-    <section class="mobile-order-3">
-        <h2>Области картинки</h2>
-        <p>Квадрат - русская версия сайта КУБГУ</p>
-        <p>Круг - английская версия сайта КУБГУ</p>
-        <img src="a2cbabc9ba9c37d069d0d7fc8390e327.jpg"
-             alt="Квадрат и круг"
-             usemap="#examplemap">
-
-        <map name="examplemap">
-            <area shape="rect" coords="240,25,430,195" href="https://kubsu.ru" alt="Русский" title="https://kubsu.ru">
-            <area shape="circle" coords="110,110,110" href="https://kubsu.ru/en" alt="English" title="https://kubsu.ru/en">
-        </map>
-    </section>
-
-    <section class="mobile-order-4">
-        <h2>Нумерованный список</h2>
-        <ol>
-            <li><a href="https://kubsu.ru" title="Главная страница КубГУ">Главная</a></li>
-            <li><a href="https://kubsu.ru/ru/university">Университет</a></li>
-            <li><a href="https://kubsu.ru/ru/education">Образование</a></li>
-            <li><a href="https://kubsu.ru/ru/science">Наука</a></li>
-            <li><a href="https://kubsu.ru/ru/abiturient">Абитуриентам</a></li>
-        </ol>
-    </section>
-
-    <section class="mobile-order-1">
-        <h2 id="table">Таблица</h2>
-        <table>
-            <tr>
-                <th rowspan="2">№</th>
-                <th colspan="2">ФИО</th>
-                <th rowspan="2">Группа</th>
-                <th rowspan="2">Оценка</th>
-            </tr>
-            <tr>
-                <th>Фамилия</th>
-                <th>Имя</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Иванов</td>
-                <td>Иван</td>
-                <td>101</td>
-                <td>5</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Петров</td>
-                <td>Пётр</td>
-                <td>102</td>
-                <td>4</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Сидоров</td>
-                <td>Сидор</td>
-                <td>103</td>
-                <td>5</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>Кузнецов</td>
-                <td>Никита</td>
-                <td rowspan="2">104</td>
-                <td>3</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>Смирнова</td>
-                <td>Анна</td>
-                <td>4</td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>Фёдоров</td>
-                <td>Фёдор</td>
-                <td>105</td>
-                <td>5</td>
-            </tr>
-        </table>
-    </section>
-
-    <section class="mobile-order-5" id="fragment">
-        <h2 id="form">Форма</h2>
-        <form id="myForm">
-            <div class="form-group">
-                <label for="name" class="required">Имя:</label>
-                <div class="field-hint">Введите ваше полное имя</div>
-                <input type="text" id="name" name="name" required minlength="2" placeholder="Например: Иван Иванов">
-                <div class="error" id="nameError">Имя должно содержать минимум 2 символа</div>
-            </div>
+public class InterfaceBody {
+    public static void main(String[] args) {
+        Body[] f;
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("Введите кол-во элементов");
+        int k = sc.nextInt();
+        f = new Body[k];
+        
+        for (int i = 0; i < k; i++) {
+            System.out.println("1-шар, 2-параллелограмм");
+            int p = sc.nextInt();
             
-            <div class="form-group">
-                <label for="phone" class="required">Телефон:</label>
-                <div class="field-hint">Введите 11 цифр без пробелов и других символов</div>
-                <input type="tel" id="phone" name="phone" pattern="[0-9]{11}" required placeholder="Например: 79101234567">
-                <div class="error" id="phoneError">Телефон должен содержать ровно 11 цифр</div>
-            </div>
+            if (p == 1) {
+                System.out.println("Введите r");
+                double r = sc.nextDouble();
+                Shar shar = new Shar(r);
+                f[i] = shar;
+            }
             
-            <div class="form-group">
-                <label for="email" class="required">Email:</label>
-                <div class="field-hint">Введите действующий email адрес</div>
-                <input type="email" id="email" name="email" required placeholder="Например: example@mail.ru">
-                <div class="error" id="emailError">Введите корректный email адрес</div>
-            </div>
-            
-            <div class="form-group">
-                <label for="birthdate" class="required">Дата рождения:</label>
-                <div class="field-hint">Выберите вашу дату рождения</div>
-                <input type="date" id="birthdate" name="birthdate" required>
-                <div class="error" id="birthdateError">Пожалуйста, выберите дату рождения</div>
-            </div>
-
-            <div class="form-group">
-                <label class="required">Пол:</label>
-                <div class="field-hint">Выберите ваш пол</div>
-                <div class="radio-group">
-                    <label><input type="radio" name="gender" value="male" required> Мужской</label>
-                    <label><input type="radio" name="gender" value="female"> Женский</label>
-                </div>
-                <div class="error" id="genderError">Пожалуйста, выберите ваш пол</div>
-            </div>
-
-            <div class="form-group">
-                <label for="languages">Любимый язык программирования:</label>
-                <div class="field-hint">Вы можете выбрать несколько языков, удерживая клавишу Ctrl</div>
-                <select multiple id="languages" name="languages" size="5">
-                    <option value="pascal">Pascal</option>
-                    <option value="python">Python</option>
-                    <option value="c++">C++</option>
-                    <option value="c">C</option>
-                    <option value="js">JavaScript</option>
-                    <option value="java">Java</option>
-                    <option value="php">PHP</option>
-                    <option value="ruby">Ruby</option>
-                </select>
-                <div class="error" id="languagesError">Пожалуйста, выберите хотя бы один язык программирования</div>
-            </div>
-
-            <div class="form-group">
-                <label for="bio">Биография:</label>
-                <div class="field-hint">Расскажите немного о себе</div>
-                <textarea id="bio" name="bio" rows="4" placeholder="Например: Учусь программированию, интересуюсь веб-разработкой..."></textarea>
-            </div>
-            
-            <div class="form-group">
-                <div class="checkbox-group">
-                    <label>
-                        <input type="checkbox" name="agreement" required> 
-                        <span class="required">С контрактом ознакомлен(а)</span>
-                    </label>
-                </div>
-                <div class="error" id="agreementError">Необходимо согласие с контрактом</div>
-            </div>
-            
-            <button type="submit">Сохранить</button>
-            <div id="formMessage" style="display:none; margin-top:15px; padding:10px; border-radius:4px;"></div>
-        </form>
-    </section>
-</main>
-
-<footer>
-    <p>© 2023 Aisha_UP_UP Corporation. Все права защищены.</p>
-</footer>
-</body>
-</html>
+            if (p == 2) {
+                System.out.println("Введите 3 стороны");
+                double a = sc.nextDouble();
+                double b1 = sc.nextDouble();
+                double c = sc.nextDouble();
+                Paral paral = new Paral(a, b1, c);
+                f[i] = paral;
+            }
+        }
+        
+        for (int i = 0; i < k; i++) {
+            f[i].print();
+            System.out.println("S=" + f[i].S() + " V=" + f[i].V());
+        }
+    }
+}
